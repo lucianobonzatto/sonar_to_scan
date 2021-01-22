@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<launch>
+
+    <param name="/use_sim_time" value="true"/>
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="ultrasound_1" args="-1 1 0 1.57 0 0 robot_footprint /ultrasound1 1" />
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="ultrasound_2" args="-0.5 1 0 1.57 0 0 robot_footprint ultrasound2 1" />
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="ultrasound_3" args="0 1 0 1.57 0 0 robot_footprint ultrasound3 1" />
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="ultrasound_4" args="0.5 1 0 1.57 0 0 robot_footprint ultrasound4 1" />
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="ultrasound_5" args="1 1 0 1.57  0 0 robot_footprint ultrasound5 1" />
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="ultrasound_6" args="1.5 1 0 1.57 0 0 robot_footprint ultrasound6 1" />
+
+    <node pkg="tf" type="static_transform_publisher"
+    name="pointClound" args="0 0 0 1.57 0 0 robot_footprint rslidar 1" />
+
+    <node pkg="rviz" type="rviz" name="rviz"
+    args="-d /home/lukn23/robot_ws/src/ultrasound_lsc/launch/teste.rviz"/>
+
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+      <remap from="cloud_in" to="rslidar_points/time"/>
+      <rosparam>
+        scan_time: 0.033
+        angle_min: -2.0
+        angle_max: 2.0
+        range_min: 0.65
+        range_max: 200.0
+        min_height: -0.3
+        max_height: 0.5
+      </rosparam>
+    </node>
+
+    <node pkg="rosbag" type="play" name="player" output="screen" args="--clock /home/lukn23/2021-01-19-14-07-03.bag"/>
+
+</launch>
