@@ -17,8 +17,8 @@ ultrasoundMng::~ultrasoundMng(){
 	sensors.clear();
 }
 
-void ultrasoundMng::addUltrasound(ros::NodeHandle *n, std::string topic){
-	ultrasound* p = new ultrasound(n, topic);
+void ultrasoundMng::addUltrasound(ros::NodeHandle *n, std::string name){
+	ultrasound* p = new ultrasound(n, name);
 	sensors.push_back(p);
 }
 
@@ -117,9 +117,9 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_msg)
 			int index = (angle - output.angle_min) / output.angle_increment;
 			if(output.ranges[index] > range)
 					output.ranges[index] = range;
-			if(output.ranges[index] > range)
+			if(output.ranges[index+1] > range)
 					output.ranges[index+1] = range;
-			if(output.ranges[index] > range)
+			if(output.ranges[index-1] > range)
 					output.ranges[index-1] = range;
 
 /*			for(int j = 0; j <= sensors[i]->getField()/2; j++)
