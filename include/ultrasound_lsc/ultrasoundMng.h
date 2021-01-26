@@ -17,7 +17,7 @@ public:
 	ultrasoundMng(ros::NodeHandle *n);
 	~ultrasoundMng();
 
-	void addUltrasound(ros::NodeHandle *n, std::string topic);
+	void addUltrasound(ros::NodeHandle *n, std::string name);
 	void printSensors();
 	void lscCallback(const sensor_msgs::LaserScanConstPtr& cloud_msg);
 };
