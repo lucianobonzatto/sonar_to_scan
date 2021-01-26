@@ -20,3 +20,5 @@ the [name] is used to create de topic and the tf frame of the sensor.
 ### Published
 `/scan/ultrasound` - the laserScan output (sensor_msgs/LaserScan) 
 
+### Using
+`rosrun ultrasound_lsc ultrasoundTOlsc`
