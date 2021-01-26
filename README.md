@@ -11,9 +11,9 @@ the [name] is used to create de topic and the tf frame of the sensor.
 ## Topics
 
 ### Subscribed
-`/[name]` - the ultrasound input (sensor_msgs/Range)
+`/[name]` (`sensor_msgs/Range`) - the ultrasound input
 
-`/scan` - the laserScan input (sensor_msgs/LaserScan) 
+`/scan` (`sensor_msgs/LaserScan`)  - the laserScan input
 
 `/tf` - read the ultrasounds position
 
