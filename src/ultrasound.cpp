@@ -3,7 +3,7 @@
 ultrasound::ultrasound(ros::NodeHandle *n, std::string name){
 	topic = name;
 	frame = name;
-	rangeSub = n->subscribe(topic, 1, &ultrasound::rangeCallback, this);
+	rangeSub = n->subscribe(topic + "/raw", 1, &ultrasound::rangeCallback, this);
 }
 
 void ultrasound::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){

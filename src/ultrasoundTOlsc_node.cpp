@@ -8,12 +8,12 @@ int main(int argc, char** argv)
 	ros::NodeHandle n;
 
 	ultrasoundMng teste(&n, "/scan", "scan/ultrasound");
-	teste.addUltrasound(&n, "ultrasound_1/raw");
-	teste.addUltrasound(&n, "ultrasound_2/raw");
-	teste.addUltrasound(&n, "ultrasound_3/raw");
-	teste.addUltrasound(&n, "ultrasound_4/raw");
-	teste.addUltrasound(&n, "ultrasound_5/raw");
-	teste.addUltrasound(&n, "ultrasound_6/raw");
+	teste.addUltrasound(&n, "ultrasound_1");
+	teste.addUltrasound(&n, "ultrasound_2");
+	teste.addUltrasound(&n, "ultrasound_3");
+	teste.addUltrasound(&n, "ultrasound_4");
+	teste.addUltrasound(&n, "ultrasound_5");
+	teste.addUltrasound(&n, "ultrasound_6");
 /*	teste.addUltrasound(&n, "ultrasound1");
 	teste.addUltrasound(&n, "ultrasound2");
 	teste.addUltrasound(&n, "ultrasound3");
