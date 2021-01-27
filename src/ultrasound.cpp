@@ -8,6 +8,9 @@ ultrasound::ultrasound(ros::NodeHandle *n, std::string name){
 
 void ultrasound::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){
 	value = *msg_in;
+	value.range /= 100;
+	value.min_range /= 100;
+	value.max_range /= 100;
 }
 
 bool ultrasound::inLimits(){
