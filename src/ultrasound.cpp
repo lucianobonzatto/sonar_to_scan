@@ -10,6 +10,13 @@ void ultrasound::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){
 	value = *msg_in;
 }
 
+bool ultrasound::inLimits(){
+	if((value.range <= value.max_range) && (value.range >= value.min_range)){
+		return true;
+	}
+	return false;
+}
+
 float ultrasound::getRange(){return value.range;}
 float ultrasound::getField(){return value.field_of_view;}
 std::string ultrasound::getTopic(){return topic;}

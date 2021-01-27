@@ -12,6 +12,7 @@ private:
 public:
 	ultrasound(ros::NodeHandle *n, std::string name);
 	void rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in);
+	bool inLimits();
 	float getRange();
 	float getField();
         std::string getTopic();

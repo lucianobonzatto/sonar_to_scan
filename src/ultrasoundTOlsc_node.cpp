@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "ultrasoundTOlsc");
 	ros::NodeHandle n;
 
-	ultrasoundMng teste(&n);
+	ultrasoundMng teste(&n, "/scan", "scan/ultrasound");
 	teste.addUltrasound(&n, "ultrasound1");
 	teste.addUltrasound(&n, "ultrasound2");
 	teste.addUltrasound(&n, "ultrasound3");
