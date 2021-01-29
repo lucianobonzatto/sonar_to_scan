@@ -4,7 +4,7 @@ Includes ultrasounds valors on a laserScan Topic
 
 ## Configuration
 
-In /teste_sensor.yaml, define the name of laserScan topics and ultrasounds.
+Define in `/teste_sensor.yaml` the name of ultrasounds and laserScan topics.
 
 ## Topics
 ### Subscribed
