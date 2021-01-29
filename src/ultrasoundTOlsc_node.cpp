@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ros/ros.h"
 #include "ultrasound_lsc/ultrasoundMng.h"
 
@@ -5,29 +6,17 @@ int main(int argc, char** argv)
 {
 	ROS_INFO("ultrasoundTOlsc");
 	ros::init(argc, argv, "ultrasoundTOlsc");
-	ros::NodeHandle n;
+	ros::NodeHandle n, nhp("~");
+	std::vector<std::string> sensors;
 
-	ultrasoundMng teste(&n, "/scan", "scan/ultrasound");
-	teste.addUltrasound(&n, "ultrasound_1");
-	teste.addUltrasound(&n, "ultrasound_2");
-	teste.addUltrasound(&n, "ultrasound_3");
-	teste.addUltrasound(&n, "ultrasound_4");
-	teste.addUltrasound(&n, "ultrasound_5");
-	teste.addUltrasound(&n, "ultrasound_6");
-/*	teste.addUltrasound(&n, "ultrasound1");
-	teste.addUltrasound(&n, "ultrasound2");
-	teste.addUltrasound(&n, "ultrasound3");
-	teste.addUltrasound(&n, "ultrasound4");
-	teste.addUltrasound(&n, "ultrasound5");
-	teste.addUltrasound(&n, "ultrasound6");*/
+	nhp.getParam("ultrasounds", sensors);
+	ultrasoundMng teste(&n, nhp.param<std::string>("laserScan/input", "scan"),
+                                nhp.param<std::string>("laserScan/output", "scan/ultrasound"));
 
+	for(int i=0; i<sensors.size(); i++){
+		teste.addUltrasound(&n, sensors[i]);
+	}
 
 	ros::spin();
-/*	while(ros::ok())
-	{
-	//	teste.printSensors();
-//		sleep(1);
-		ros::spinOnce();
-	}*/
 	return 0;
 }

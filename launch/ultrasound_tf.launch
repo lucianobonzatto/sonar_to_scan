@@ -4,22 +4,22 @@
     <param name="/use_sim_time" value="true"/>
 
     <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_1" args="-1 1 0 1.57 0 0 robot_footprint ultrasound_1 1" />
+    name="ultrasound_1" args="-1 1 0 1.57 0 0 robot_footprint ultrasound1 1" />
 
     <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_2" args="-0.5 1 0 1.57 0 0 robot_footprint ultrasound_2 1" />
+    name="ultrasound_2" args="-0.5 1 0 1.57 0 0 robot_footprint ultrasound2 1" />
 
     <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_3" args="0 1 0 1.57 0 0 robot_footprint ultrasound_3 1" />
+    name="ultrasound_3" args="0 1 0 1.57 0 0 robot_footprint ultrasound3 1" />
 
     <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_4" args="0.5 1 0 1.57 0 0 robot_footprint ultrasound_4 1" />
+    name="ultrasound_4" args="0.5 1 0 1.57 0 0 robot_footprint ultrasound4 1" />
 
     <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_5" args="1 1 0 1.57  0 0 robot_footprint ultrasound_5 1" />
+    name="ultrasound_5" args="1 1 0 1.57 0 0 robot_footprint ultrasound5 1" />
 
     <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_6" args="1.5 1 0 1.57 0 0 robot_footprint ultrasound_6 1" />
+    name="ultrasound_6" args="1.5 1 0 1.57 0 0 robot_footprint ultrasound6 1" />
 
     <node pkg="tf" type="static_transform_publisher"
     name="pointClound" args="0 0 0 1.57 0 0 robot_footprint rslidar 1" />
@@ -27,7 +27,11 @@
     <node pkg="rviz" type="rviz" name="rviz"
     args="-d /home/lukn23/robot_ws/src/ultrasound_lsc/launch/teste.rviz"/>
 
-    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+    <node pkg="ultrasound_lsc" type="ultrasoundTOlsc" name="ultrasoundTOlsc" >
+	<rosparam command="load" file="$(find ultrasound_lsc)/teste_sensor.yaml" />
+    </node>
+
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
       <remap from="cloud_in" to="rslidar_points/time"/>
       <rosparam>
         scan_time: 0.033
@@ -41,5 +45,4 @@
     </node>
 
     <node pkg="rosbag" type="play" name="player" output="screen" args="--clock /home/lukn23/2021-01-19-14-07-03.bag"/>
-
 </launch>

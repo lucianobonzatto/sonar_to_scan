@@ -27,26 +27,26 @@ void ultrasoundMng::printSensors(){
 	}
 }
 
-void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_msg){
-	sensor_msgs::LaserScan output;
+void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_input){
+	sensor_msgs::LaserScan laser_output;
 
-	output.header = laser_msg->header;
-	output.angle_min = -M_PI;
-	output.angle_max = M_PI;
-	output.angle_increment = laser_msg->angle_increment;
-	output.time_increment = laser_msg->time_increment;
-	output.scan_time = laser_msg->scan_time;
-	output.range_min = laser_msg->range_min;
-	output.range_max = laser_msg->range_max;
+	laser_output.header = laser_input->header;
+	laser_output.angle_min = -M_PI;
+	laser_output.angle_max = M_PI;
+	laser_output.angle_increment = laser_input->angle_increment;
+	laser_output.time_increment = laser_input->time_increment;
+	laser_output.scan_time = laser_input->scan_time;
+	laser_output.range_min = laser_input->range_min;
+	laser_output.range_max = laser_input->range_max;
 
-	uint32_t ranges_size = std::ceil((output.angle_max - output.angle_min) / output.angle_increment);
-	output.ranges.assign(ranges_size, std::numeric_limits<double>::infinity());
+	uint32_t ranges_size = std::ceil((laser_output.angle_max - laser_output.angle_min) / laser_output.angle_increment);
+	laser_output.ranges.assign(ranges_size, std::numeric_limits<double>::infinity());
 
-	//include the laser_msg to output
-	for(int i=0; i<laser_msg->ranges.size(); i++)
+	//include the laser_input to laser_output
+	for(int i=0; i<laser_input->ranges.size(); i++)
 	{
-		int j = ((i * laser_msg->angle_increment + laser_msg->angle_min) - output.angle_min)/output.angle_increment;
-		output.ranges[j] = laser_msg->ranges[i];
+		int j = ((i * laser_input->angle_increment + laser_input->angle_min) - laser_output.angle_min)/laser_output.angle_increment;
+		laser_output.ranges[j] = laser_input->ranges[i];
 	}
 
 	for(int i = 0; i < sensors.size(); i++){
@@ -58,7 +58,7 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_msg)
 		//read the ultrasound position
 		geometry_msgs::TransformStamped transform;
 		try {
-                transform = tfBuffer.lookupTransform(laser_msg->header.frame_id,
+                transform = tfBuffer.lookupTransform(laser_input->header.frame_id,
                                                      sensors[i]->getFrame(),
                                                      ros::Time(0));
             	} catch (tf2::TransformException ex) {
@@ -66,29 +66,29 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_msg)
                 	continue;
             	}
 
-/*		include the ultrasounds to output */
-		geometry_msgs::PointStamped pt_SensorFrame, pt_LaserFrame;
+/*		include the ultrasounds to laser_output */
+		geometry_msgs::PointStamped point_SensorFrame, point_LaserFrame;
 
 /*			include only the central point */
-		pt_SensorFrame.point.x = sensors[i]->getRange();
-		tf2::doTransform(pt_SensorFrame, pt_LaserFrame, transform);	//tranform to laser frame
-		includePointToLaser(pt_LaserFrame, &output);			//include the left point
+		point_SensorFrame.point.x = sensors[i]->getRange();
+		tf2::doTransform(point_SensorFrame, point_LaserFrame, transform);	//tranform to laser frame
+		includePointToLaser(point_LaserFrame, &laser_output);			//include the left point
 
 /*			include all points of the cone
 		for(float j=0; j < sensors[i]->getField()/4; j=j+0.01)
 		{
-			pt_SensorFrame.point.x = sensors[i]->getRange();
-			pt_SensorFrame.point.y = tan(j)*sensors[i]->getRange();
-			tf2::doTransform(pt_SensorFrame, pt_LaserFrame, transform);	//tranform to laser frame
-			includePointToLaser(pt_LaserFrame, &output);			//include the left point
+			point_SensorFrame.point.x = sensors[i]->getRange();
+			point_SensorFrame.point.y = tan(j)*sensors[i]->getRange();
+			tf2::doTransform(point_SensorFrame, point_LaserFrame, transform);	//tranform to laser frame
+			includePointToLaser(point_LaserFrame, &laser_output);			//include the left point
 
-			pt_SensorFrame.point.y *= -1;
-			tf2::doTransform(pt_SensorFrame, pt_LaserFrame, transform);	//tranform to laser frame
-			includePointToLaser(pt_LaserFrame, &output);			//include the right point
+			point_SensorFrame.point.y *= -1;
+			tf2::doTransform(point_SensorFrame, point_LaserFrame, transform);	//tranform to laser frame
+			includePointToLaser(point_LaserFrame, &laser_output);			//include the right point
 		}*/
 	}
 
-	lscPub.publish(output);
+	lscPub.publish(laser_output);
 }
 
 void ultrasoundMng::includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan){

@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+laserScan:
+    input: scan
+    output: scan/ultrasound
+
+ultrasounds:
+    - ultrasound_1
+    - ultrasound_2
+    - ultrasound_3
+    - ultrasound_4
+    - ultrasound_5
+    - ultrasound_6
+...
