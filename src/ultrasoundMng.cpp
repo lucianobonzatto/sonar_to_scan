@@ -73,6 +73,7 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_inpu
 		point_SensorFrame.point.x = sensors[i]->getRange();
 		tf2::doTransform(point_SensorFrame, point_LaserFrame, transform);	//tranform to laser frame
 		includePointToLaser(point_LaserFrame, &laser_output);			//include the left point
+//		std::cout << sensors[i]->getFrame() << std::endl;
 
 /*			include all points of the cone
 		for(float j=0; j < sensors[i]->getField()/4; j=j+0.01)
