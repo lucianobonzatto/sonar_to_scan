@@ -1,0 +1,13 @@
+%YAML 1.2
+---
+laserScan:
+    input: scan
+    output: scan/range
+
+sonar_topics:
+    - sonar/front
+    - sonar/rear
+
+sonar_frames:
+    - base_sonar_front
+    - base_sonar_rear

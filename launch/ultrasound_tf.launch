@@ -28,7 +28,7 @@
     args="-d /home/lukn23/robot_ws/src/ultrasound_lsc/launch/teste.rviz"/>
 
     <node pkg="ultrasound_lsc" type="ultrasoundTOlsc" name="ultrasoundTOlsc" >
-	<rosparam command="load" file="$(find ultrasound_lsc)/teste_sensor.yaml" />
+	<rosparam command="load" file="$(find ultrasound_lsc)/config/teste_sensor.yaml" />
     </node>
 
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">

@@ -1,33 +1,33 @@
 #include <iostream>
 #include <math.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
-#include "ultrasoundMng.h"
+#include "sonar_manager.h"
 
-ultrasoundMng::ultrasoundMng(ros::NodeHandle *n, std::string inputTopic, std::string outputTopic):
+SonarManager::SonarManager(ros::NodeHandle *n, std::string inputTopic, std::string outputTopic):
 tfListener(tfBuffer){
 	lscPub = n->advertise<sensor_msgs::LaserScan>(outputTopic, 1, this);
-	lscSub = n->subscribe(inputTopic, 1, &ultrasoundMng::lscCallback, this);
+	lscSub = n->subscribe(inputTopic, 1, &SonarManager::lscCallback, this);
 }
 
-ultrasoundMng::~ultrasoundMng(){
+SonarManager::~SonarManager(){
 	for(int i = 0; i < sensors.size(); i++)	{
 		delete sensors[i];
 	}
 	sensors.clear();
 }
 
-void ultrasoundMng::addUltrasound(ros::NodeHandle *n, std::string name){
-	ultrasound* p = new ultrasound(n, name);
+void SonarManager::addSonar(ros::NodeHandle *n, std::string name, std::string frame){
+	sonar* p = new sonar(n, name, frame);
 	sensors.push_back(p);
 }
 
-void ultrasoundMng::printSensors(){
+void SonarManager::printSensors(){
 	for(int i = 0; i < sensors.size(); i++){
 		std::cout << sensors[i]->getTopic() << " -> " << sensors[i]->getRange() << std::endl;
 	}
 }
 
-void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_input){
+void SonarManager::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_input){
 	sensor_msgs::LaserScan laser_output;
 
 	laser_output.header = laser_input->header;
@@ -43,7 +43,7 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_inpu
 	laser_output.ranges.assign(ranges_size, std::numeric_limits<double>::infinity());
 
 	//include the laser_input to laser_output
-	for(int i=0; i<laser_input->ranges.size(); i++)
+	for(int i = 0; i<laser_input->ranges.size(); i++)
 	{
 		int j = ((i * laser_input->angle_increment + laser_input->angle_min) - laser_output.angle_min)/laser_output.angle_increment;
 		laser_output.ranges[j] = laser_input->ranges[i];
@@ -51,7 +51,7 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_inpu
 
 	for(int i = 0; i < sensors.size(); i++){
 		if(!sensors[i]->inLimits()){
-	               	ROS_WARN("sensor %i out of ultrasound limits", i+1);
+	               	ROS_WARN("sensor %i out of sonar limits", i+1);
 			continue;
 		}
 
@@ -91,7 +91,7 @@ void ultrasoundMng::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_inpu
 	lscPub.publish(laser_output);
 }
 
-void ultrasoundMng::includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan){
+void SonarManager::includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan){
 	double range = hypot(point.point.y, point.point.x);
 	double angle = atan2(point.point.y, point.point.x);
 

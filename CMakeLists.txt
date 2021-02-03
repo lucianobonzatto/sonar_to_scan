@@ -207,5 +207,5 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(ultrasoundTOlsc src/ultrasoundTOlsc_node.cpp src/ultrasoundMng.cpp src/ultrasound.cpp)
-target_link_libraries(ultrasoundTOlsc ${catkin_LIBRARIES})
+add_executable(sonar_to_scan src/sonar_to_scan.cpp src/sonar_manager.cpp src/sonar.cpp)
+target_link_libraries(sonar_to_scan ${catkin_LIBRARIES})

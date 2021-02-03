@@ -1,24 +1,24 @@
 #include "ros/ros.h"
 #include <tf2_ros/transform_listener.h>
 #include <vector>
-#include "ultrasound.h"
+#include "sonar.h"
 #include "sensor_msgs/LaserScan.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "geometry_msgs/PointStamped.h"
 
-class ultrasoundMng{
+class SonarManager{
 private:
-	std::vector<ultrasound*> sensors;
+	std::vector<sonar*> sensors;
 	ros::Publisher lscPub;
 	ros::Subscriber lscSub;
 	tf2_ros::Buffer tfBuffer;
 	tf2_ros::TransformListener tfListener;
 
 public:
-	ultrasoundMng(ros::NodeHandle *n, std::string inputTopic, std::string outputTopic);
-	~ultrasoundMng();
+	SonarManager(ros::NodeHandle *n, std::string inputTopic, std::string outputTopic);
+	~SonarManager();
 
-	void addUltrasound(ros::NodeHandle *n, std::string name);
+	void addSonar(ros::NodeHandle *n, std::string name, std::string frame);
 	void printSensors();
 	void lscCallback(const sensor_msgs::LaserScanConstPtr& cloud_msg);
 private:

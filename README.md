@@ -4,7 +4,7 @@ Includes sonar readings into a laser scan topic
 
 ## Configuration
 
-Define in `/teste_sensor.yaml` the name of the sonar and scan topics.
+Define in `/config/teste_sensor.yaml` the name of the sonar and scan topics and add it to the launch file.
 
 ## Topics
 ### Subscribed
