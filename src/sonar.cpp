@@ -4,7 +4,7 @@ sonar::sonar(ros::NodeHandle *n, std::string name, std::string frame){
 	topic = name;
 	frame = frame;
 //	rangeSub = n->subscribe(topic, 1, &sonar::rangeCallback, this);
-	rangeSub = n->subscribe(topic + "/raw", 1, &sonar::rangeCallback, this);
+	rangeSub = n->subscribe(topic, 1, &sonar::rangeCallback, this);
 }
 
 void sonar::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){
