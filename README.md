@@ -1,24 +1,24 @@
 # ultrasound_lsc
 
-Includes ultrasounds valors on a laserScan Topic
+Includes sonar readings into a laser scan topic
 
 ## Configuration
 
-Define in `/teste_sensor.yaml` the name of ultrasounds and laserScan topics.
+Define in `/teste_sensor.yaml` the name of the sonar and scan topics.
 
 ## Topics
 ### Subscribed
 
-- `/[name]/raw` (`sensor_msgs/Range`) - the ultrasounds input, with the distances in cm
+- `/[name]/raw` (`sensor_msgs/Range`) - the ultrasounds input, with the distances in centimeters
 
 - `/scan` (`sensor_msgs/LaserScan`)  - the laserScan input
 
-- `/tf` - read the ultrasounds position (frame = `/[name]`)
+- `/tf` - sonar sensor transform (frame = `/[name]`)
 
 ### Published
 
-`/scan/ultrasound` (`sensor_msgs/LaserScan`) - the laserScan output, with the distances in m
+`/scan/ultrasound` (`sensor_msgs/LaserScan`) - the laserScan output, with the distances in meters
 
-## Using
+## How to use
 
 `roslaunch ultrasound_lsc ultrasound_tf.launch`
