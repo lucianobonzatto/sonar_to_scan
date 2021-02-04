@@ -3,36 +3,12 @@
 
     <param name="/use_sim_time" value="true"/>
 
-    <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_1" args="-1 1 0 1.57 0 0 robot_footprint ultrasound1 1" />
-
-    <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_2" args="-0.5 1 0 1.57 0 0 robot_footprint ultrasound2 1" />
-
-    <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_3" args="0 1 0 1.57 0 0 robot_footprint ultrasound3 1" />
-
-    <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_4" args="0.5 1 0 1.57 0 0 robot_footprint ultrasound4 1" />
-
-    <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_5" args="1 1 0 1.57 0 0 robot_footprint ultrasound5 1" />
-
-    <node pkg="tf" type="static_transform_publisher"
-    name="ultrasound_6" args="1.5 1 0 1.57 0 0 robot_footprint ultrasound6 1" />
-
-    <node pkg="tf" type="static_transform_publisher"
-    name="pointClound" args="0 0 0 1.57 0 0 robot_footprint rslidar 1" />
-
-    <node pkg="rviz" type="rviz" name="rviz"
-    args="-d /home/lukn23/robot_ws/src/ultrasound_lsc/launch/teste.rviz"/>
-
-    <node pkg="ultrasound_lsc" type="ultrasoundTOlsc" name="ultrasoundTOlsc" >
-	<rosparam command="load" file="$(find ultrasound_lsc)/config/teste_sensor.yaml" />
+    <node pkg="ultrasound_lsc" type="sonar_to_scan" name="sonar_to_scan_node" output="screen" >
+        <rosparam command="load" file="$(find ultrasound_lsc)/config/sim_model.yaml" />
     </node>
 
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
-      <remap from="cloud_in" to="rslidar_points/time"/>
+      <remap from="cloud_in" to="rslidar_points"/>
       <rosparam>
         scan_time: 0.033
         angle_min: -2.0
@@ -44,5 +20,4 @@
       </rosparam>
     </node>
 
-    <node pkg="rosbag" type="play" name="player" output="screen" args="--clock /home/lukn23/2021-01-19-14-07-03.bag"/>
 </launch>

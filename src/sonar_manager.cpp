@@ -23,7 +23,7 @@ void SonarManager::addSonar(ros::NodeHandle *n, std::string name, std::string fr
 
 void SonarManager::printSensors(){
 	for(int i = 0; i < sensors.size(); i++){
-		std::cout << sensors[i]->getTopic() << " -> " << sensors[i]->getRange() << std::endl;
+		std::cout << sensors[i]->getTopic() << "  <-> " << sensors[i]->getFrame() << std::endl;
 	}
 }
 
@@ -50,8 +50,11 @@ void SonarManager::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_input
 	}
 
 	for(int i = 0; i < sensors.size(); i++){
+
+		std::cout << "------------ "<< sensors[i]->getTopic() <<" ------------" << std:: endl;
+
 		if(!sensors[i]->inLimits()){
-	               	ROS_WARN("sensor %i out of sonar limits", i+1);
+	               	std::cout << "sensor out of sonar limits" << std::endl;
 			continue;
 		}
 
@@ -68,6 +71,8 @@ void SonarManager::lscCallback(const sensor_msgs::LaserScanConstPtr& laser_input
 
 /*		include the ultrasounds to laser_output */
 		geometry_msgs::PointStamped point_SensorFrame, point_LaserFrame;
+
+		std::cout << "sonar range: " << sensors[i]->getRange() << std:: endl;
 
 /*			include only the central point */
 		point_SensorFrame.point.x = sensors[i]->getRange();
@@ -101,4 +106,8 @@ void SonarManager::includePointToLaser(geometry_msgs::PointStamped point, sensor
 		if(laserScan->ranges[index] > range)
 			laserScan->ranges[index] = range;
 	}
+	else
+		std::cout << "fora dos limites do laser scan" << std:: endl
+			  << "angle: " << angle << "range: " << range << std:: endl;
+
 }

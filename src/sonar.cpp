@@ -2,16 +2,16 @@
 
 sonar::sonar(ros::NodeHandle *n, std::string name, std::string frame){
 	topic = name;
-	frame = frame;
+	this->frame = frame;
 //	rangeSub = n->subscribe(topic, 1, &sonar::rangeCallback, this);
 	rangeSub = n->subscribe(topic, 1, &sonar::rangeCallback, this);
 }
 
 void sonar::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){
 	value = *msg_in;
-	value.range /= 100;
-	value.min_range /= 100;
-	value.max_range /= 100;
+//	value.range /= 100;
+//	value.min_range /= 100;
+//	value.max_range /= 100;
 }
 
 bool sonar::inLimits(){

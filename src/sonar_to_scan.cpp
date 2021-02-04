@@ -15,7 +15,8 @@ int main(int argc, char** argv)
 	SonarManager teste(&nh, nhp.param<std::string>("laserScan/input", "scan"),
                                 nhp.param<std::string>("laserScan/output", "scan/ultrasound"));
 
-	for(int i=0; i<sensors_topics.size(); i++){
+	for(int i=0; i<sensors_frames.size(); i++){
+//		std::cout << sensors_frames[i] << std::endl;
 		teste.addSonar(&nh, sensors_topics[i], sensors_frames[i]);
 	}
 	teste.printSensors();

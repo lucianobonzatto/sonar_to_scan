@@ -11,4 +11,21 @@ ultrasounds:
     - ultrasound4
     - ultrasound5
     - ultrasound6
+
+sonar_topics:
+    - ultrasound1
+    - ultrasound2
+    - ultrasound3
+    - ultrasound4
+    - ultrasound5
+    - ultrasound6
+
+sonar_frames:
+    - ultrasound1
+    - ultrasound2
+    - ultrasound3
+    - ultrasound4
+    - ultrasound5
+    - ultrasound6
+
 ...
