@@ -15,7 +15,7 @@ void sonar::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){
 }
 
 bool sonar::inLimits(){
-	if((value.range <= value.max_range) && (value.range >= value.min_range)){
+	if((value.range < value.max_range) && (value.range > value.min_range)){
 		return true;
 	}
 	return false;
