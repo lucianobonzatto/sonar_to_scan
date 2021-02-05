@@ -4,7 +4,7 @@ Transform sonar readings into a laser scan topic
 
 ## Configuration
 
-Define in `/config/teste_sensor.yaml` the frame and topic of the sonar and add it to the launch file.
+Define in `/config/[name].yaml` the frame and topic of the sonar, the desired scan params and add it to the launch file.
 
 ## Topics
 ### Subscribed
@@ -19,4 +19,4 @@ Define in `/config/teste_sensor.yaml` the frame and topic of the sonar and add i
 
 ## How to use
 
-`roslaunch ultrasound_lsc sonar_to_scan.launch`
+`roslaunch sonar_to_scan sonar_to_scan.launch`
