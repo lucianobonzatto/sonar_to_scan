@@ -1,8 +1,12 @@
 %YAML 1.2
 ---
 laserScan:
-    input: scan
-    output: scan/range
+    frame_id: rslidar
+    angle_increment: 0.0174532923847
+    time_increment: 0.0
+    scan_time: 0.0329999998212
+    range_min: 0.649999976158
+    range_max: 200.0
 
 sonar_topics:
     - sonar/front
