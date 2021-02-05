@@ -1,6 +1,6 @@
 #include <iostream>
 #include "ros/ros.h"
-#include "ultrasound_lsc/sonar_manager.h"
+#include "sonar_to_scan/sonar_manager.h"
 
 int main(int argc, char** argv)
 {

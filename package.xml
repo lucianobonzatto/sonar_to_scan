@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ultrasound_lsc</name>
+  <name>sonar_to_scan</name>
   <version>0.0.0</version>
-  <description>The ultrasound_lsc package</description>
+  <description>The sonar_to_scan package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/ultrasound_lsc</url> -->
+  <!-- <url type="website">http://wiki.ros.org/sonar_to_scan</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -64,6 +64,7 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>tf2</exec_depend>
   <exec_depend>tf2_geometry_msgs</exec_depend>
+
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

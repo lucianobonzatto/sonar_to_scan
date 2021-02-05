@@ -25,7 +25,7 @@
     name="pointClound" args="0 0 0 1.57 0 0 robot_footprint rslidar 1" />
 
     <node pkg="rviz" type="rviz" name="rviz"
-    args="-d /home/lukn23/catkin_ws/src/ultrasound_lsc/launch/teste.rviz"/>
+    args="-d /home/lukn23/catkin_ws/src/sonar_to_scan/launch/teste.rviz"/>
 
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
       <remap from="cloud_in" to="rslidar_points/time"/>

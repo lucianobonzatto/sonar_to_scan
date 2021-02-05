@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <node pkg="ultrasound_lsc" type="sonar_to_scan" name="sonar_to_scan_node" output="screen" >
-	<rosparam command="load" file="$(find ultrasound_lsc)/config/sim_model.yaml" />
+    <node pkg="sonar_to_scan" type="sonar_to_scan" name="sonar_to_scan_node" output="screen" >
+	<rosparam command="load" file="$(find sonar_to_scan)/config/sim_model.yaml" />
 	<param name="frequency" value="10"/>
     </node>
 </launch>
