@@ -1,3 +1,4 @@
+#include <iostream>
 #include "sonar.h"
 
 sonar::sonar(ros::NodeHandle *n, std::string name, std::string frame){
@@ -12,6 +13,7 @@ void sonar::rangeCallback(const sensor_msgs::Range::ConstPtr& msg_in){
 //	value.range /= 100;
 //	value.min_range /= 100;
 //	value.max_range /= 100;
+//	std::cout << topic << ", " << frame << ", " << value.range << std::endl;
 }
 
 bool sonar::inLimits(){

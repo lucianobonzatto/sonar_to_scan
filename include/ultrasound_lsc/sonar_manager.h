@@ -10,17 +10,18 @@ class SonarManager{
 private:
 	std::vector<sonar*> sensors;
 	ros::Publisher lscPub;
-	ros::Subscriber lscSub;
 	tf2_ros::Buffer tfBuffer;
 	tf2_ros::TransformListener tfListener;
+	sensor_msgs::LaserScan laserMsg;
 
 public:
-	SonarManager(ros::NodeHandle *n, std::string inputTopic, std::string outputTopic);
+	SonarManager(ros::NodeHandle *n, std::string outputTopic, sensor_msgs::LaserScan laser_output);
 	~SonarManager();
 
 	void addSonar(ros::NodeHandle *n, std::string name, std::string frame);
 	void printSensors();
 	void lscCallback(const sensor_msgs::LaserScanConstPtr& cloud_msg);
+	void loop(int frequency);
 private:
 	void includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan);
 };

@@ -27,10 +27,6 @@
     <node pkg="rviz" type="rviz" name="rviz"
     args="-d /home/lukn23/catkin_ws/src/ultrasound_lsc/launch/teste.rviz"/>
 
-    <node pkg="ultrasound_lsc" type="sonar_to_scan" name="sonar_to_scan_node" output="screen" >
-        <rosparam command="load" file="$(find ultrasound_lsc)/config/teste_sensor.yaml" />
-    </node>
-
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
       <remap from="cloud_in" to="rslidar_points/time"/>
       <rosparam>
