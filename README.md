@@ -1,4 +1,4 @@
-# ultrasound_lsc
+# sonar_to_scan
 
 Transform sonar readings into a laser scan topic
 
