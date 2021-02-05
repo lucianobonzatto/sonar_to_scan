@@ -38,7 +38,7 @@ void SonarManager::includePointToLaser(geometry_msgs::PointStamped point, sensor
 			laserScan->ranges[index] = range;
 	}
 	else
-		std::cout << "fora dos limites do laser scan" << std:: endl
+		std::cout << "Out of scan range error:" << std:: endl
 			  << "angle: " << angle << "range: " << range << std:: endl;
 
 }
@@ -53,11 +53,10 @@ void SonarManager::loop(int frequency){
 
 		for(int i = 0; i < sensors.size(); i++){
 			
-			std::cout << "------------------------" << std:: endl;
-			std::cout << sensors[i]->getTopic() << ", " << sensors[i]->getFrame() << ", " << sensors[i]->getRange() << std::endl;
+			//std::cout << "------------------------" << std:: endl;
+			//std::cout << sensors[i]->getTopic() << ", " << sensors[i]->getFrame() << ", " << sensors[i]->getRange() << std::endl;
 
 			if(!sensors[i]->inLimits()){
-		               	std::cout << "sensor out of sonar limits" << std::endl;
 				continue;
 			}
 

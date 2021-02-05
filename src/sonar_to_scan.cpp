@@ -25,15 +25,15 @@ int main(int argc, char** argv)
 	laser_output.angle_min = -M_PI;
 	laser_output.angle_max = M_PI;
 
-	SonarManager teste(&nh, nhp.param<std::string>("laserScan/output", "scan/ultrasound"),
+	SonarManager sonar_manager(&nh, nhp.param<std::string>("laserScan/output", "scan/range"),
 				laser_output);
 
 	for(int i=0; i<sensors_frames.size(); i++){
 //		std::cout << sensors_frames[i] << std::endl;
-		teste.addSonar(&nh, sensors_topics[i], sensors_frames[i]);
+		sonar_manager.addSonar(&nh, sensors_topics[i], sensors_frames[i]);
 	}
-	teste.printSensors();
-	teste.loop(frequency);
+	sonar_manager.printSensors();
+	sonar_manager.loop(frequency);
 
 	return 0;
 }
