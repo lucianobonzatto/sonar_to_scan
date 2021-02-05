@@ -1,23 +1,21 @@
 # ultrasound_lsc
 
-Includes sonar readings into a laser scan topic
+Transform sonar readings into a laser scan topic
 
 ## Configuration
 
-Define in `/config/teste_sensor.yaml` the name of the sonar and scan topics, the sonar frames and remember to include this file in the launch file.
+Define in `/config/teste_sensor.yaml` the frame and topic of the sonar and add it to the launch file.
 
 ## Topics
 ### Subscribed
 
-- `/[sonar_topic_name]` (`sensor_msgs/Range`) - the ultrasounds input, with the distances in centimeters
+- parameter sonar_topics (`sensor_msgs/Range`) - the ultrasounds input, with the distances in centimeters
 
-- `/scan` (`sensor_msgs/LaserScan`)  - the laserScan input
-
-- `/tf` - sonar sensor transform
+- `/tf` - sonar sensor transform (`sonar_frames`)
 
 ### Published
 
-`/scan/ultrasound` (`sensor_msgs/LaserScan`) - the laserScan output, with the distances in meters
+- parameter /laserScan/output (`sensor_msgs/LaserScan`) - the laserScan output, with the distances in meters
 
 ## How to use
 
