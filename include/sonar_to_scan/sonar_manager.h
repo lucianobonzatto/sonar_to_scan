@@ -5,6 +5,7 @@
 #include "sensor_msgs/LaserScan.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "geometry_msgs/PointStamped.h"
+#include <limits>
 
 class SonarManager{
 private:
@@ -14,6 +15,8 @@ private:
 	tf2_ros::TransformListener tfListener;
 	sensor_msgs::LaserScan laserMsg;
 
+	void includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan);
+
 public:
 	SonarManager(ros::NodeHandle *n, std::string outputTopic, sensor_msgs::LaserScan laser_output);
 	~SonarManager();
@@ -22,6 +25,4 @@ public:
 	void printSensors();
 	void lscCallback(const sensor_msgs::LaserScanConstPtr& cloud_msg);
 	void loop(int frequency);
-private:
-	void includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan);
 };

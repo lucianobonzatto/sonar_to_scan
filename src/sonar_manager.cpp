@@ -30,17 +30,17 @@ void SonarManager::printSensors(){
 void SonarManager::includePointToLaser(geometry_msgs::PointStamped point, sensor_msgs::LaserScan* laserScan){
 	double range = hypot(point.point.y, point.point.x);
 	double angle = atan2(point.point.y, point.point.x);
+	int index = (angle - laserScan->angle_min) / laserScan->angle_increment;
 
 	if((angle >= laserScan->angle_min && angle <= laserScan->angle_max) && (range >= laserScan->range_min && range <= laserScan->range_max))
 	{
 		int index = (angle - laserScan->angle_min) / laserScan->angle_increment;
-		if(laserScan->ranges[index] > range)
+		if(laserScan->ranges[index] > range) // if there is a reading in the same angle, add the closest one
 			laserScan->ranges[index] = range;
 	}
 	else
-		std::cout << "Out of scan range error:" << std:: endl
-			  << "angle: " << angle << "range: " << range << std:: endl;
-
+		// std::cout << "Out of scan range error:" << std:: endl << "angle: " << angle << "range: " << range << std:: endl;
+		laserScan->ranges[index] = std::numeric_limits<double>::quiet_NaN();
 }
 
 void SonarManager::loop(int frequency){
@@ -71,7 +71,6 @@ void SonarManager::loop(int frequency){
 
 /*			include the ultrasounds to laser_output */
 			geometry_msgs::PointStamped point_SensorFrame, point_LaserFrame;
-
 
 /*			include only the central point */
 			point_SensorFrame.point.x = sensors[i]->getRange();

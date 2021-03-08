@@ -15,6 +15,6 @@ public:
 	bool inLimits();
 	float getRange();
 	float getField();
-        std::string getTopic();
-        std::string getFrame();
+    std::string getTopic();
+    std::string getFrame();
 };
